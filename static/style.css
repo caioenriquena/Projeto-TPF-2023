@@ -63,3 +63,6 @@ body {
 .container a:hover {
     text-decoration: underline;
 }
+body{
+    background-image: url(papel.jpg);
+}
