@@ -1,0 +1,56 @@
+Documentação 
+Este é um script Python usando o framework Flask para criar um aplicativo web. Sendo suas principais funcionalidades:
+
+Cadastro de Usuários:
+
+Rota /validacao_cadastrorecebe dados do formulário de cadastro via método POST.
+Valide se o e-mail já está cadastrado.
+Salva os dados em um arquivo JSON chamado "cadastro.json".
+
+Login de usuários:
+
+Rota /validacao_loginvalida as credenciais do usuário em relação aos dados no arquivo "cadastro.json".
+Se as credenciais são válidas, redirecionando para a rota principal; caso contrário, exibe uma mensagem de acesso negado.
+Páginas principais:
+
+Rota /principalexibe a página principal.
+Rota /(raiz) exibe uma página de login.
+Rota /cadastroexibe uma página de cadastro.
+Rota /sobreexibe a página "Sobre Nós".
+
+Glossário:
+Use um arquivo JSON chamado "glossario.json" para armazenar termos e seus significados.
+Rotas /glossario, /adicionar, e /deletar/<termo>permitem visualizar, adicionar e excluir termos do glossário.
+
+Atividades:
+Usa um arquivo JSON chamado "atividade.json" para armazenar títulos e especificidades de atividades.
+Rotas /atividades, /adicionar_atividade, e /deletar_atividade/<titulo>permite visualizar, adicionar e excluir atividades.
+
+O script usa funções para carregar, salvar e manipular dados nos arquivos JSON associados ao cadastro de usuários, glossário e atividades. Além disso, utiliza templates HTML para renderizar as páginas da web.
+
+Página cadastro - (route '/cadastro')
+	Descrição: Cadastro de usuário no arquivo "cadastro.json"
+	Ação:  Coleta as variáveis "usuário" "email" "senha", verifica a existencia do email no arquivo "cadastro.json", caso já exista o usuário é notificado da existencia do email e seu cadastro é impossibilitado, caso contrário o cadastro é feito.
+
+Página inicial - (route '/')
+	Descrição: Página de login 
+	Ação: recolhe as variáveis, "email" e "senha", faz a verificação no arquivo json "cadastro.json" caso as variáveis sejam invalidas o acesso é negado caso contrário o usuário é encaminhado para (route '/principal')
+
+Página principal - (route '/principal')
+	Descrição: Página principal ou página de transição
+	Ação: Há 4 links nesta página
+		~Glossário
+		~Atividades
+		~Sobre nós
+		~Sair
+Página Glossário - (route '/glossário')
+	Descrição: Glossário
+	Ação: No glossário o usuário terá poderá adicionar, editar e deletar termos e seus respectivos significados.
+
+Página Atividade - (route '/atividade')
+	Descrição: Lista de Atividades
+	Ação: Nas Atividades o usuário terá poderá adicionar, editar e deletar atividades e suas respectivas descrições.
+
+Página Sobre nós - (route '/sobre')
+	Descrição: Página sobre a equipe
+	Ação: Cada integrante do grupo tem uma "session" que ao ser ativada mostra mais informações referentes ao integrante selecionado.
