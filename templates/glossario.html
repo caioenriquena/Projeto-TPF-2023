@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dicionário TEC</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Dicionário TEC</h2>
+
+    <ul class="list-group">
+        {% for termo, significado in glossario.items() %}
+            <li class="list-group-item">
+                <strong>{{ termo }}</strong>: {{ significado }}
+                <span class="float-right">
+                    
+                    <form action="{{ url_for('deletar', termo=termo) }}" method="POST">
+                        
+                        <button type="submit" class="btn btn-sm btn-danger">Deletar </button>
+                       
+                    </form><br>
+                    <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal{{ termo }}">
+                        Alterar
+                    </button>
+                </span>
+            </li>
+            <!-- Modal para alterar o significado -->
+            <div class="modal fade" id="modal{{ termo }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ termo }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel{{ termo }}">Alterar Significado</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="/adicionar" method="post">
+                            <input type="text" name="termo" value="{{termo}}" style="display: none;">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="novo_significado">Novo Significado:</label>
+                                    <input type="text" class="form-control" id="novo_significado" name="significado" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                            </div>
+                        </form>
+                        <br>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    <!-- Formulário para adicionar novo termo -->
+    <h4>Adicionar Novo Termo</h4>
+    <form action="/adicionar" method="post">
+        <div class="form-row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Termo" name="termo" required>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Significado" name="significado" required>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-success">Adicionar</button>
+            </div>
+        </div>
+    </form>
+    <br>
+        <a href="/principal" class="btn btn-primary">
+            Retornar
+        </a>
+    <!-- Scripts Bootstrap e jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

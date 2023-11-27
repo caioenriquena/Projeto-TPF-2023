@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+#button {
+    font: 20px sans-serif;
+    padding: 20px;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    height: auto;
+    width: 360px;
+    color: rgb(rgb(0, 0, 0));
+}
+#acesso {
+    color: #0000FF;
+    font: 20px sans-serif;
+}
+.container {
+    display: grid;
+    place-items: center;
+    width: auto;
+    padding: 4rem;
+    flex-direction: column;
+    align-items: center;
+    background-color: #948888;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+}
+
+.container img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: #5b5a5a;
+    
+}
+
+.container h2 {
+    margin: 1rem 0;
+    color: #333;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.container form input {
+    height: 20px;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.container form button {
+    padding: 0.5rem;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container form button:hover {
+    background-color: #555;
+}
+
+.container a {
+    margin-top: 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.container a:hover {
+    text-decoration: underline;
+}
+
+body{
+    background-image: url(/static/image/fundo.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height: 100%;
+    background-attachment: fixed;
+
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividades</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Atividades</h2>
+
+    <!-- Lista de Atividades -->
+    <ul class="list-group">
+        {% for titulo, descricao in atividades.items() %}
+            <li class="list-group-item">
+                <strong style="text-transform: uppercase;">{{ titulo }}:</strong><hr>{{ descricao }}
+                <span class="float-right">
+                    <form action="{{ url_for('deletar_atividade', titulo=titulo) }}" method="POST">
+                        
+                        <button type="submit" class="btn btn-sm btn-danger">Deletar </button>
+                       
+                    </form><br>
+                    
+                    <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal{{ titulo }}">
+                        Alterar
+                    </button>
+                       
+         
+                    
+                </span>
+            </li>
+
+            <!-- Modal para alterar a descrição da atividade -->
+            <div class="modal fade" id="modal{{ titulo }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ titulo }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel{{ titulo }}">Alterar Descrição da Atividade</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="/adicionar_atividade" method="POST">
+                            <input type="text" name="titulo" value="{{titulo}}" style="display: none;">   
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="nova_descricao">Nova Descrição:</label>
+                                    <input type="text" class="form-control" id="nova_descricao" name="descricao" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    <!-- Formulário para adicionar nova atividade -->
+    <h4>Adicionar Nova Atividade</h4>
+    <form action="/adicionar_atividade" method="post">
+        <div class="form-row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Título" name="titulo" required>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Descrição" name="descricao" required>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-success">Adicionar</button>
+                
+            </div>
+            
+        </div>
+    </form>
+    <br>
+        <a href="/principal" class="btn btn-primary">
+            Retornar
+        </a>
+
+    <!-- Scripts Bootstrap e jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,23 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/html">
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'style.css')}}">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script type="text/javascript"> alert("Usuario cadastrado") </script> -->
     <title>Cadastro</title>
 </head>
 <body>
+    <script type="text/javascript">
+        var mensagem = '{{ mensagem }}'
+        if(mensagem != ""){
+            alert (mensagem)
+            if(mensagem == "Sucesso"){
+                window.location.href="/"
+            }
+            if (mensagem == "Acesso negado")
+                window.location.href= "/cadastro"
+        }
+    </script>
     <div class="container">
-        <img src="{{url_for('static', filename='logo.jpg')}}" alt="Logo">
+        <img src="/static/image/logo.jpg" alt="Logo">
         <h2>Cadastre-se</h2>
-        <form action="/fazer-cadastro" method="post">
+        <form action="/validacao_cadastro" method="post">
             <input type="text" name="nome" placeholder="Nome" required>
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="senha" placeholder="Senha" minlength="8" required>
             
-            <button type="submit" action="/login">Enviar</button>
+            <button type="submit" id="button">Enviar</button>
         </form>
-        <a href="/">Já possui uma conta? Clique aqui.</a>
+        <a href="/" id="acesso">Já possui uma conta? Clique aqui.</a>
     </div>
 </body>
 </html>
