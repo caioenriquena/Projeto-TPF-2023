@@ -1,10 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
-import os
 
-atividades = {
-    
-}
 app = Flask(__name__)
 
 #--------------------------------------------------- Validação de Cadastro -----------------------------------------------------------------
@@ -70,7 +66,7 @@ def validacao_login():
                 mensagem = "Acesso negado! (Usuário  e ou senha inválidos)"
                 return render_template('login.html', mensagem=mensagem)
 
-#----------------------------------------------------------- Rota Cadastro -------------------------------------------------------------------
+#------------------------------------------------------- Rota Cadastro -------------------------------------------------------------------
 @app.route('/cadastro')
 def cadastro():
     return render_template('cadastro.html')
@@ -101,7 +97,7 @@ def index():
     glossario = carregar_glossario()
     return render_template("glossario.html", glossario=glossario)
 
-# -------------------------------------------- Adicionar termo e siginificado glossário --------------------------------------------------------
+# -------------------------------------------- Adiciona e Altera, termo e siginificado glossário --------------------------------------------------------
 @app.route('/adicionar', methods=['POST'])
 def adicionar():
     termo = request.form['termo']
@@ -111,9 +107,6 @@ def adicionar():
     
     salvar_glossario(glossario)
     return redirect('/glossario')
-
-#---------------------------------------------------- Alterar termo no glossário -------------------------------------------------------------
-
 
 #---------------------------------------------------- Deletar termo no glossário -------------------------------------------------------------
 @app.route('/deletar/<termo>', methods=['POST'])
@@ -127,8 +120,9 @@ def deletar(termo):
     return redirect('/glossario')
 
 # --------------------------------------------------------ATIVIDADES-------------------------------------------------------------------------------
-#Rota de atividades
+# ******Constante recebendo o arquivo
 JSON_ATIVIDADE = 'atividade.json'
+# ---------------------------------------------Função para Ler o 'atividade.json'-----------------------------------------------------------------------------
 def carregar_atividades():
     try:
         with open(JSON_ATIVIDADE, 'r', encoding= "UTF-8") as file:
@@ -148,7 +142,7 @@ def lista_atividades():
     atividades = carregar_atividades()
     return render_template('atividades.html', atividades=atividades)
 
-# --------------------------------------------------- Adicionar atividade --------------------------------------------------------------------------
+# --------------------------------------------------- Adicionar e Alterar atividade --------------------------------------------------------------------------
 @app.route('/adicionar_atividade', methods=['POST'])
 def adicionar_atividade():
     
@@ -160,10 +154,7 @@ def adicionar_atividade():
     salvar_atividades(atividades)
     return redirect('/atividades')
 
-#--------------------------------------------------------- Alterar atividade -------------------------------------------------------------------------
-
-
-#------------------------------------------------------ Deletar atividade ---------------------------------------------------------------------
+# ----------------------------------------------------- Deletar atividade ---------------------------------------------------------------------
 @app.route('/deletar_atividade/<titulo>', methods=['POST'])
 def deletar_atividade(titulo):
     atividades=carregar_atividades()
